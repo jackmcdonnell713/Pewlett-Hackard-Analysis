@@ -20,4 +20,26 @@ From our deliverables in the project there are four major takeaways from the dat
 
 * How many roles will need to be filled as the "silver tsunami" begins to make an impact? - Given the staggering number of retirees looming upon the company ( roughly over 90,000 per our deliverable 1 data table) I would say a safe number of hires would be mininum 70,000.  Given you are still down 10s of thousands in man power, the mentorship program introcued in deliverable two can hopefully help recouperate the balance of expertise in the company and make rollover less straining on employees and company alike.  Hiring that many people in a short window however seems lofty and Pewlett-Hackard may be in for a rude awakening.
 
-* Are there enough qualified, retirement-ready employees in the departments to mentor the next generation of Pewlett Hackard employees? - 1549 eligible retirees within the silver tsunami demographic seems like a lot but considering you most likely will not be able to convince all of them to participate then lets be safe and say they acquire 1000 company veterans to partake.  That would leave each mentor with roughly 90 people to mentor beneath them to get a 100% turn around.  No, I do not think there are enough qualified retirement ready personnel at the company.  Incentivise this program for all older employees to avoid future pit holes of manpower removal or the company will suffer dramatically.  Each mentor should ideally work with under 10 people in a year to create an active environment in which they can instruct their successor to do the job successfully which would require probably around 8-9 thousand mentors!
+* Are there enough qualified, retirement-ready employees in the departments to mentor the next generation of Pewlett Hackard employees? - 1549 eligible retirees within the silver tsunami demographic seems like a lot but considering you most likely will not be able to convince all of them to participate then lets be safe and say they acquire 1000 company veterans to partake.  That would leave each mentor with roughly 90 people to mentor beneath them to get a 100% turn around.  No, I do not think there are enough qualified retirement ready personnel at the company.  Incentivise this program for all older employees to avoid future pit holes of manpower removal or the company will suffer dramatically.  Each mentor should ideally work with under 10 people in a year to create an active environment in which they can instruct their successor to do the job successfully which would require probably around 8-9 thousand mentors!  However, these 1549 eligible mentors were those only born in the year 1965, though the argument within the hypothetical is that this is the age in which most mentors probably would come from a simple change to our 2nd querie in which our WHERE expression be changed to in between 1950 january first and the end of 1965 as opposed to strictly doing 1965.  This could provide a much larger pool of eligible and willing employees than those strictly born in 1965 that can be used to help ease Pewlett-Hackard weather the storm that is coming!
+
+
+```
+SELECT DISTINCT ON (e.emp_no) e.emp_no,
+	e.first_name,
+	e.last_name,
+	e.birth_date,
+	de.from_date,
+	de.to_date,
+	t.title
+INTO mentorship_eligibility
+FROM employees as e 
+INNER JOIN dept_emp as de
+ON (e.emp_no = de.emp_no)
+INNER JOIN titles as t
+ON (e.emp_no = t.emp_no)
+WHERE (e.birth_date BETWEEN '1950-01-01' AND '1965-12-31')
+AND (de.to_date = '9999-01-01')
+ORDER BY emp_no;
+```
+
+
